@@ -1,1 +1,1 @@
-CS325-Algorithms
+CS 325 Algorithms
