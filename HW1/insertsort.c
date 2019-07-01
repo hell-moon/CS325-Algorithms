@@ -12,24 +12,24 @@
  * Notes:  This insertSort was adapted from Java into C, from the khanAcademy challenge: Implement insertion sort, and referenced from geeksForGeeks implementation. 
  */
 
-
-void insert(int array[], int rightIndex, int value) {
-    int j;
-		for(j = rightIndex;
-        j >= 0 && array[j] > value;
-        j--) {
-        array[j + 1] = array[j];
-    }   
-    array[j + 1] = value; 
+void insert(int array[], int rightIndex, int value)
+{
+	int j;
+	for (j = rightIndex; j >= 0 && array[j] > value; j--)
+	{
+		array[j + 1] = array[j];
+	}
+	array[j + 1] = value;
 };
 
-void insertionSort(int array[], int length) {
-    int i;
-		for(i = 1; i < length; i++){
-        insert(array, i-1, array[i]);
-    }
+void insertionSort(int array[], int length)
+{
+	int i;
+	for (i = 1; i < length; i++)
+	{
+		insert(array, i - 1, array[i]);
+	}
 };
-
 
 int main(int argc, char *argv[])
 {
@@ -43,6 +43,7 @@ int main(int argc, char *argv[])
 	size_t n = 0;
 	int charRead = -5;
 
+	// for each line read in as a string, parse and store in buffer as integers, then call sort on the buffer
 	while (charRead = getline(&lineptr, &n, data) > 1)
 	{
 		// strcpy(buffer, lineptr);

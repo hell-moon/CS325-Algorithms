@@ -8,9 +8,20 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
+#include <unistd.h> // for sleep()
+
+// #include <random.h>
+
 /**
  * Notes:  This mergeSort was adapted from Java into C, from the khanAcademy challenge: Implement merge, and referenced from geeksForGeeks implementation. 
  */
+
+void error(const char *msg)
+{
+	perror(msg);
+	exit(0);
+} // Error function used for reporting issues
 
 void merge(int arr[], int l, int m, int r)
 {
@@ -93,48 +104,43 @@ void mergeSort(int arr[], int l, int r)
 
 int main(int argc, char *argv[])
 {
-	int idx = 0;
-	// open data.txt for reading, and create new file merge.txt if none exists, and open for truncating and writing
-	FILE *data = fopen("data.txt", "r");
-	FILE *outFile = fopen("merge.txt", "w");
-	int buffer[1000];
-	char *lineptr = NULL;
-	size_t n = 0;
-	int charRead = -5;
-
-	while (charRead = getline(&lineptr, &n, data) > 1)
+	if (argc != 2)
 	{
-		// strcpy(buffer, lineptr);
-		//printf("%s", buffer);
-		char *token;
-		token = strtok(lineptr, " ");
-
-		//printf("%s\n", token);
-		int arrSize = atoi(token);
-		//printf("%d", arrSize);
-
-		token = strtok(NULL, " ");
-		for (idx = 0; idx < arrSize; idx++)
-		{
-			buffer[idx] = atoi(token);
-			token = strtok(NULL, " ");
-			// printf("%d ", buffer[idx]);
-		}
-		// printf("\n");
-
-		// here, the list of numbers is read from file and stored in buffer array
-		mergeSort(buffer, 0, arrSize - 1);
-
-		// buffer is now sorted, print sorted list to file
-		for (idx = 0; idx < arrSize; idx++)
-		{
-			fprintf(outFile, "%d ", buffer[idx]);
-		}
-		fprintf(outFile, "\n");
+		error("USAGE: mergeSortAnalysis 'size of list to sort'");
 	}
-	free(lineptr);
+	srand(time(NULL));
+	int loopCounter = 5;
 
-	fclose(data);
-	fclose(outFile);
+	while (loopCounter != 0)
+	{
+
+		int sizeList = atoi(argv[1]);
+		double time_spent = 0.0;
+		int idx = 0;
+		// open data.txt for reading, and create new file merge.txt if none exists, and open for truncating and writing
+		// FILE *data = fopen("data.txt", "r");
+		// FILE *outFile = fopen("merge.txt", "w");
+		int buffer[sizeList];
+
+		for (idx = 0; idx < sizeList; idx++)
+		{
+			buffer[idx] = rand() % 10001;
+			//printf("%d ", buffer[idx]);
+		}
+
+		//get time before and after the sort, the difference is the running time
+		clock_t begin = clock();
+		mergeSort(buffer, 0, sizeList - 1);
+		clock_t end = clock();
+		time_spent += (double)(end - begin) / CLOCKS_PER_SEC;
+		// for (idx = 0; idx < sizeList; idx++)
+		// {
+		// 	// buffer[idx] = rand()%10001;
+		//
+		// }
+		printf("Elapsed time: \t%f \n", time_spent);
+		loopCounter--;
+	}
+
 	return 0;
 }
