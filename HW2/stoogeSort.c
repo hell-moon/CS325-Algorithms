@@ -10,6 +10,7 @@ void error(const char *msg)
 	exit(0);
 } // Error function used for reporting issues
 
+// swap the values at the indexes i, j in list
 void swap(int list[], int i, int j)
 {
 	int temp = list[i];
@@ -62,12 +63,15 @@ int main(int argc, char *argv[])
 		// strcpy(buffer, lineptr);
 		//printf("%s", buffer);
 		char *token;
+		// get first token separated by a space, from line.  This is the size of the list. 
 		token = strtok(lineptr, " ");
 
 		//printf("%s\n", token);
+		// convert from string to integer
 		int arrSize = atoi(token);
 		//printf("%d", arrSize);
 
+		// keep parsing the rest of the line and converting to integer
 		token = strtok(NULL, " ");
 		for (idx = 0; idx < arrSize; idx++)
 		{

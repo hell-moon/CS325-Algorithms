@@ -18,6 +18,7 @@ void error(const char *msg)
 	exit(0);
 } // Error function used for reporting issues
 
+// swap the values at the indexes i, j in list
 void swap(int list[], int i, int j)
 {
 	int temp = list[i];
@@ -57,7 +58,7 @@ int main(int argc, char *argv[])
 	int loopCounter = -5;
 	int sizelists[] = {3000, 3200, 3500, 3700, 4000, 4250, 4500, 5000};
 
-	for(loopCounter = 0; loopCounter < 8; loopCounter++)
+	for (loopCounter = 0; loopCounter < 8; loopCounter++)
 	{
 		//use second argument passed in as the size of list to generate
 		int sizeList = sizelists[loopCounter];
@@ -80,14 +81,16 @@ int main(int argc, char *argv[])
 		clock_t end = clock();
 		time_spent += (double)(end - begin) / CLOCKS_PER_SEC;
 
-		for (idx = 0; idx < sizeList; idx++)
-		{
-			printf("%d ", buffer[idx]);
-		}
-		printf("\n\n");
+		/*
+		Uncomment the for loop below to print the sorted lists (verify that they are indeed sorted)
+	*/
+		// for (idx = 0; idx < sizeList; idx++)
+		// {
+		// 	printf("%d ", buffer[idx]);
+		// }
+		// printf("\n\n");
 
 		printf("Size: %d Elapsed time: \t%f \n", sizelists[loopCounter], time_spent);
-		
 	}
 
 	return 0;
